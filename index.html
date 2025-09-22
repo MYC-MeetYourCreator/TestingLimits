@@ -27,8 +27,7 @@
       left: 0;
       width: 110%;
       height: 110%;
-      /* Use the local image file 'jungle.jpg' in the same folder */
-      background: url('jungle.jpg') center/cover no-repeat;
+      background: url('jungle.jpg') center/cover no-repeat; /* Local image in same folder */
       filter: brightness(0.4) contrast(1.2) saturate(1.1);
       z-index: -2;
       animation: slowPan 40s linear infinite;
@@ -91,8 +90,10 @@
   <!-- Local image background -->
   <div class="bg-image"></div>
 
+  <!-- Rain effect -->
   <div class="rain" id="rain"></div>
 
+  <!-- Centered text -->
   <div class="centered-text">TestingLimits</div>
 
   <script>
@@ -100,7 +101,7 @@
     const rainContainer = document.getElementById('rain');
     const numberOfDrops = 200;
 
-    for(let i=0; i<numberOfDrops; i++) {
+    for(let i = 0; i < numberOfDrops; i++) {
       const drop = document.createElement('div');
       drop.className = 'drop';
       drop.style.left = Math.random() * 100 + 'vw';
@@ -109,6 +110,8 @@
       rainContainer.appendChild(drop);
     }
   </script>
+
 </body>
 </html>
+
 
