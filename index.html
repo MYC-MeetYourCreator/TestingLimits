@@ -16,54 +16,21 @@
       width: 100%;
       overflow: hidden;
       font-family: 'Arial Black', sans-serif;
-      background: #000;
-      position: relative;
     }
 
-    /* Background image container */
+    /* Background image */
     .bg-image {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 110%;
-      height: 110%;
-      background: url('jungle.jpg') center/cover no-repeat; /* Local image in same folder */
-      filter: brightness(0.4) contrast(1.2) saturate(1.1);
-      z-index: -2;
-      animation: slowPan 40s linear infinite;
-    }
-
-    @keyframes slowPan {
-      0% { transform: translate(0,0) scale(1); }
-      50% { transform: translate(-5%, -5%) scale(1.05); }
-      100% { transform: translate(0,0) scale(1); }
-    }
-
-    /* Rain overlay */
-    .rain {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      pointer-events: none;
+      background: url('jungle.jpg') center/cover no-repeat;
+      filter: brightness(0.4) contrast(1.2) saturate(1.1);
       z-index: -1;
     }
 
-    .drop {
-      position: absolute;
-      width: 2px;
-      height: 15px;
-      background: rgba(173,216,230,0.7);
-      animation: fall linear infinite;
-    }
-
-    @keyframes fall {
-      0% { transform: translateY(-20px); opacity:1; }
-      100% { transform: translateY(100vh); opacity:0; }
-    }
-
-    /* Centered text */
+    /* Centered animated text */
     .centered-text {
       position: absolute;
       top: 50%;
@@ -87,31 +54,12 @@
 </head>
 <body>
 
-  <!-- Local image background -->
+  <!-- Static background image -->
   <div class="bg-image"></div>
 
-  <!-- Rain effect -->
-  <div class="rain" id="rain"></div>
-
-  <!-- Centered text -->
+  <!-- Centered animated text -->
   <div class="centered-text">TestingLimits</div>
-
-  <script>
-    // Generate random rain drops
-    const rainContainer = document.getElementById('rain');
-    const numberOfDrops = 200;
-
-    for(let i = 0; i < numberOfDrops; i++) {
-      const drop = document.createElement('div');
-      drop.className = 'drop';
-      drop.style.left = Math.random() * 100 + 'vw';
-      drop.style.animationDuration = (0.5 + Math.random() * 1.5) + 's';
-      drop.style.animationDelay = Math.random() * 5 + 's';
-      rainContainer.appendChild(drop);
-    }
-  </script>
 
 </body>
 </html>
-
 
