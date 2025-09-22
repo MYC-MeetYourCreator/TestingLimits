@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About — TestingLimits</title>
 
-  <!-- Google fonts -->
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Rochester&family=Righteous&display=swap" rel="stylesheet">
 
   <style>
@@ -20,44 +20,79 @@
       height: 100%;
       background: var(--bg);
       color: var(--red);
-      -webkit-font-smoothing: antialiased;
-      font-family: "Rochester", "Righteous", cursive;
+      font-family: "Rochester","Righteous", cursive;
       overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* Wrapper to center content */
-    .container {
-      min-height: 100vh;
+    body {
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: clamp(2rem, 5vw, 4rem);
       text-align: center;
+      padding: 2rem;
     }
 
-    /* Speech box with animation */
-    .speech-box {
+    .card-wrapper {
+      position: relative;
+      display: inline-block;
+    }
+
+    .card {
+      background: rgba(0,0,0,0.85);
+      border: 2px solid var(--red);
+      border-radius: 15px;
+      padding: 3rem;
       max-width: 900px;
-      padding: clamp(2rem, 5vw, 3rem);
-      font-size: clamp(1.2rem, 3.5vw, 2rem);
-      line-height: 1.35;
-      letter-spacing: 0.5px;
-      color: var(--red);
-      text-shadow: 0 1px 0 rgba(0,0,0,0.6),
-                   0 6px 30px rgba(224,24,24,0.1);
-      background: rgba(255,255,255,0.02);
-      border: 1px solid rgba(255,255,255,0.05);
-      border-radius: 12px;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.7);
+      box-shadow: 0 0 40px rgba(224,24,24,0.4);
       opacity: 0;
       transform: translateY(30px);
-      animation: fadeUp 1.6s ease forwards;
+      animation: fadeUp 1.5s ease forwards;
+      position: relative;
+      z-index: 1;
     }
 
     @keyframes fadeUp {
-      0% { opacity: 0; transform: translateY(30px); }
-      100% { opacity: 1; transform: translateY(0); }
+      0% { opacity: 0; transform: translateY(30px);}
+      100% { opacity: 1; transform: translateY(0);}
     }
+
+    .speech {
+      font-size: clamp(1.2rem, 3.5vw, 2rem);
+      line-height: 1.35;
+      letter-spacing: 0.5px;
+      text-shadow: 0 1px 0 rgba(0,0,0,0.6),
+                   0 6px 30px rgba(224,24,24,0.1);
+      white-space: pre-wrap;
+    }
+
+    /* Freestyle Flames */
+    .flame {
+      position: absolute;
+      width: 20px;
+      height: 60px;
+      background: radial-gradient(circle at 50% 80%, var(--red) 0%, rgba(255,140,0,0.8) 60%, transparent 70%);
+      border-radius: 50% 50% 20% 20%;
+      filter: blur(1px);
+      z-index: 0;
+      animation: flicker 0.6s infinite alternate;
+    }
+
+    @keyframes flicker {
+      0% { transform: scale(1) rotate(0deg); opacity: 0.9; }
+      25% { transform: scale(1.1) rotate(2deg); opacity: 1; }
+      50% { transform: scale(0.9) rotate(-2deg); opacity: 0.85; }
+      75% { transform: scale(1.05) rotate(1deg); opacity: 0.95; }
+      100% { transform: scale(1) rotate(0deg); opacity: 0.9; }
+    }
+
+    /* Multiple flames freestyle */
+    .flame1 { left: -40px; bottom: 0; height: 50px; animation-delay: 0s; }
+    .flame2 { left: -25px; bottom: 20px; height: 70px; animation-delay: 0.2s; }
+    .flame3 { left: -60px; bottom: 10px; height: 60px; animation-delay: 0.4s; }
+    .flame4 { right: -40px; bottom: 5px; height: 65px; animation-delay: 0.1s; }
+    .flame5 { right: -25px; bottom: 25px; height: 50px; animation-delay: 0.3s; }
+    .flame6 { right: -60px; bottom: 15px; height: 75px; animation-delay: 0.5s; }
 
     /* Back button */
     .back-wrap {
@@ -70,8 +105,8 @@
 
     .back-button {
       font-family: "Righteous", sans-serif;
-      font-size: 1.1rem;
       font-weight: 900;
+      font-size: 1.1rem;
       color: var(--red);
       background: none;
       border: 2px solid var(--red);
@@ -88,18 +123,25 @@
       transform: translateY(-3px);
     }
 
-    @media (max-width: 550px) {
-      .speech-box {
-        font-size: 1.05rem;
-        line-height: 1.4;
-      }
+    @media (max-width: 600px) {
+      .card { padding: 2rem; }
+      .flame { width: 15px; }
     }
   </style>
 </head>
 <body>
 
-  <main class="container">
-    <div class="speech-box">
+  <div class="card-wrapper">
+    <!-- Freestyle flames -->
+    <div class="flame flame1"></div>
+    <div class="flame flame2"></div>
+    <div class="flame flame3"></div>
+    <div class="flame flame4"></div>
+    <div class="flame flame5"></div>
+    <div class="flame flame6"></div>
+
+    <div class="card">
+      <div class="speech">
 From the cracked pavements of Thessaloniki to the corners the city keeps hidden,
 a new force is moving.
 Not a trend.
@@ -124,8 +166,9 @@ Quantities stay low.
 Eyes stay sharp.
 Miss a drop—you’re out.
 Simple as that.
+      </div>
     </div>
-  </main>
+  </div>
 
   <div class="back-wrap">
     <a href="index.html" class="back-button">Back to Main Page</a>
@@ -133,3 +176,4 @@ Simple as that.
 
 </body>
 </html>
+
