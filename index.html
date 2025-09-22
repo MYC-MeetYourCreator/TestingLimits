@@ -3,46 +3,98 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>TestingLimits</title>
+  <title>Hamburger Menu Example</title>
   <style>
-    * {
+    body, html {
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
-    }
-
-    body, html {
       height: 100%;
       width: 100%;
-      overflow: hidden;
       font-family: 'Arial Black', sans-serif;
-      background-color: #000; /* solid black background */
-    }
-
-    .centered-text {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+      background-color: #000;
       color: #fff;
-      font-size: clamp(3rem, 8vw, 8rem);
-      font-weight: 900;
-      text-align: center;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      text-shadow: 0 0 25px rgba(0,0,0,0.8);
-      animation: fadeIn 3s ease-in-out forwards;
     }
 
-    @keyframes fadeIn {
-      0% {opacity: 0; transform: translate(-50%, -50%) scale(0.95);}
-      100% {opacity: 1; transform: translate(-50%, -50%) scale(1);}
+    /* Hamburger Icon */
+    .hamburger {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      width: 35px;
+      height: 25px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      cursor: pointer;
+      z-index: 1001;
     }
+
+    .hamburger div {
+      height: 5px;
+      background-color: #fff;
+      border-radius: 3px;
+      transition: all 0.3s ease;
+    }
+
+    /* Menu Panel */
+    .menu {
+      position: fixed;
+      top: 0;
+      left: -100%;
+      width: 200px;
+      height: 100%;
+      background-color: rgba(0,0,0,0.95);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transition: left 0.3s ease;
+    }
+
+    .menu.show {
+      left: 0;
+    }
+
+    .menu a {
+      font-size: 2rem;
+      font-weight: 900;
+      color: #fff;
+      text-decoration: none;
+      margin: 20px 0;
+      transition: color 0.2s ease;
+    }
+
+    .menu a:hover {
+      color: #ff0;
+    }
+
   </style>
 </head>
 <body>
 
-  <div class="centered-text">TestingLimits</div>
+  <!-- Hamburger Icon -->
+  <div class="hamburger" id="hamburger">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+
+  <!-- Menu -->
+  <div class="menu" id="menu">
+    <a href="#">Home</a>
+    <a href="#">About</a>
+    <a href="#">Contact</a>
+  </div>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const menu = document.getElementById('menu');
+
+    hamburger.addEventListener('click', () => {
+      menu.classList.toggle('show');
+    });
+  </script>
 
 </body>
 </html>
+
