@@ -50,26 +50,25 @@
     let height = canvas.height = window.innerHeight;
 
     // Create raindrops
-    const rainCount = 300;
+    const rainCount = 400;
     const rainDrops = [];
     for (let i = 0; i < rainCount; i++) {
       rainDrops.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        length: Math.random() * 20 + 10,
-        speed: Math.random() * 4 + 4,
-        opacity: Math.random() * 0.5 + 0.2
+        length: Math.random() * 25 + 15,
+        speed: Math.random() * 5 + 4,
+        opacity: Math.random() * 0.5 + 0.3
       });
     }
 
     // Draw forest silhouettes
     function drawForest() {
-      ctx.fillStyle = '#02040f';
-      ctx.fillRect(0, height - 150, width, 150); // ground
-      for (let i = 0; i < 50; i++) {
+      const treeCount = 60;
+      for (let i = 0; i < treeCount; i++) {
         const treeX = Math.random() * width;
-        const treeHeight = Math.random() * 150 + 100;
-        ctx.fillStyle = '#011';
+        const treeHeight = Math.random() * 200 + 150;
+        ctx.fillStyle = `rgba(10,30,10,1)`; // dark green trees, visible
         ctx.beginPath();
         ctx.moveTo(treeX, height);
         ctx.lineTo(treeX + 20, height);
@@ -81,8 +80,8 @@
 
     // Draw rain
     function drawRain() {
-      ctx.strokeStyle = 'rgba(174,194,224,0.5)';
-      ctx.lineWidth = 1;
+      ctx.strokeStyle = 'rgba(174,194,224,0.6)';
+      ctx.lineWidth = 1.5;
       ctx.beginPath();
       for (let i = 0; i < rainDrops.length; i++) {
         const r = rainDrops[i];
@@ -98,24 +97,31 @@
         const r = rainDrops[i];
         r.y += r.speed;
         if (r.y > height) {
-          r.y = -20;
+          r.y = -r.length;
           r.x = Math.random() * width;
         }
       }
     }
 
     function animate() {
-      ctx.clearRect(0, 0, width, height);
-      // dark night sky
+      // Night sky gradient
       const gradient = ctx.createLinearGradient(0, 0, 0, height);
-      gradient.addColorStop(0, '#001');
-      gradient.addColorStop(1, '#000');
+      gradient.addColorStop(0, '#0a0a1a'); // deep blue
+      gradient.addColorStop(1, '#000');    // black
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, width, height);
+
+      // Fog effect
+      const fog = ctx.createRadialGradient(width/2, height/2, 0, width/2, height/2, width/1.5);
+      fog.addColorStop(0, 'rgba(255,255,255,0.02)');
+      fog.addColorStop(1, 'rgba(0,0,0,0.5)');
+      ctx.fillStyle = fog;
+      ctx.fillRect(0,0,width,height);
 
       drawForest();
       drawRain();
       updateRain();
+
       requestAnimationFrame(animate);
     }
 
