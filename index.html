@@ -40,52 +40,6 @@
       100% {opacity: 1; transform: translate(-50%, -50%) scale(1);}
     }
 
-    /* Graffiti Tag EST.2025 in Corteiz style with literal blood drips */
-    .graffiti-tag {
-      font-family: 'Brush Script MT', cursive, 'Lucida Handwriting', sans-serif;
-      font-size: clamp(2rem, 4vw, 4rem);
-      font-weight: 900;
-      color: #8B0000; /* Dark red */
-      margin-top: 5px;
-      position: relative;
-      display: inline-block;
-    }
-
-    .graffiti-tag span {
-      position: relative;
-      display: inline-block;
-      margin: 0 2px;
-    }
-
-    /* Create individual blood drips per letter */
-    .graffiti-tag span::after {
-      content: '';
-      position: absolute;
-      top: 100%;
-      left: 50%;
-      width: 3px;
-      height: 0;
-      background-color: #B22222; /* blood red */
-      border-radius: 50%;
-      animation: drip 1s infinite;
-      transform: translateX(-50%);
-    }
-
-    /* Vary the drip length per letter */
-    .graffiti-tag span:nth-child(1)::after { animation-delay: 0s; height: 8px; }
-    .graffiti-tag span:nth-child(2)::after { animation-delay: 0.1s; height: 12px; }
-    .graffiti-tag span:nth-child(3)::after { animation-delay: 0.2s; height: 10px; }
-    .graffiti-tag span:nth-child(4)::after { animation-delay: 0.3s; height: 15px; }
-    .graffiti-tag span:nth-child(5)::after { animation-delay: 0.4s; height: 12px; }
-    .graffiti-tag span:nth-child(6)::after { animation-delay: 0.5s; height: 9px; }
-    .graffiti-tag span:nth-child(7)::after { animation-delay: 0.6s; height: 14px; }
-
-    @keyframes drip {
-      0% { height: 0; }
-      50% { height: 20px; }
-      100% { height: 0; }
-    }
-
     /* Hamburger Icon */
     .hamburger {
       position: fixed;
@@ -160,9 +114,6 @@
   <!-- Centered Text -->
   <div class="centered-text">
     TestingLimits
-    <div class="graffiti-tag">
-      <span>E</span><span>S</span><span>T</span><span>.</span><span>2</span><span>0</span><span>2</span><span>5</span>
-    </div>
   </div>
 
   <script>
@@ -176,4 +127,3 @@
 
 </body>
 </html>
-
