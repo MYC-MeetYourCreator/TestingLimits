@@ -1,20 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>TestingLimits</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html, body { height: 100%; width: 100%; overflow: hidden; font-family: 'Arial Black', sans-serif; background: #000; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-    canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
+    body, html {
       height: 100%;
-      z-index: -1;
+      width: 100%;
+      overflow: hidden;
+      font-family: 'Arial Black', sans-serif;
+      background-color: #000; /* solid black background */
     }
 
     .centered-text {
@@ -40,124 +42,7 @@
 </head>
 <body>
 
-  <canvas id="forestCanvas"></canvas>
   <div class="centered-text">TestingLimits</div>
-
-  <script>
-    const canvas = document.getElementById('forestCanvas');
-    const ctx = canvas.getContext('2d');
-    let width = canvas.width = window.innerWidth;
-    let height = canvas.height = window.innerHeight;
-
-    // Raindrops
-    const rainCount = 500;
-    const rainDrops = [];
-    for (let i = 0; i < rainCount; i++) {
-      rainDrops.push({
-        x: Math.random() * width,
-        y: Math.random() * height,
-        length: Math.random() * 25 + 15,
-        speed: Math.random() * 6 + 4,
-        opacity: Math.random() * 0.5 + 0.3
-      });
-    }
-
-    // Forest layers for depth
-    const forestLayers = [];
-    const layerCount = 4;
-    for (let l = 0; l < layerCount; l++) {
-      const trees = [];
-      for (let i = 0; i < 40 + l*10; i++) {
-        trees.push({
-          x: Math.random() * width,
-          height: Math.random() * (200 - l*20) + 150 - l*10,
-          width: Math.random() * 20 + 10,
-          color: `rgba(${10+l*10}, ${20+l*10}, 10, 1)` // darker in the back
-        });
-      }
-      forestLayers.push(trees);
-    }
-
-    function drawForest() {
-      for (let l = 0; l < forestLayers.length; l++) {
-        const trees = forestLayers[l];
-        for (let t of trees) {
-          ctx.fillStyle = t.color;
-          ctx.beginPath();
-          ctx.moveTo(t.x, height);
-          ctx.lineTo(t.x + t.width, height);
-          ctx.lineTo(t.x + t.width/2, height - t.height);
-          ctx.closePath();
-          ctx.fill();
-        }
-      }
-    }
-
-    function drawRain() {
-      ctx.strokeStyle = 'rgba(174,194,224,0.6)';
-      ctx.lineWidth = 1.5;
-      ctx.beginPath();
-      for (let i = 0; i < rainDrops.length; i++) {
-        const r = rainDrops[i];
-        ctx.moveTo(r.x, r.y);
-        ctx.lineTo(r.x, r.y + r.length);
-      }
-      ctx.stroke();
-    }
-
-    function updateRain() {
-      for (let r of rainDrops) {
-        r.y += r.speed;
-        if (r.y > height) {
-          r.y = -r.length;
-          r.x = Math.random() * width;
-        }
-      }
-    }
-
-    function animate() {
-      // Night sky gradient
-      const gradient = ctx.createLinearGradient(0, 0, 0, height);
-      gradient.addColorStop(0, '#0a0a1a');
-      gradient.addColorStop(1, '#000');
-      ctx.fillStyle = gradient;
-      ctx.fillRect(0, 0, width, height);
-
-      // Fog overlay for depth
-      const fog = ctx.createRadialGradient(width/2, height/2, 0, width/2, height/2, width/1.5);
-      fog.addColorStop(0, 'rgba(255,255,255,0.02)');
-      fog.addColorStop(1, 'rgba(0,0,0,0.4)');
-      ctx.fillStyle = fog;
-      ctx.fillRect(0,0,width,height);
-
-      drawForest();
-      drawRain();
-      updateRain();
-
-      requestAnimationFrame(animate);
-    }
-
-    animate();
-
-    window.addEventListener('resize', () => {
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
-      // Recreate forest layers for new width
-      forestLayers.length = 0;
-      for (let l = 0; l < layerCount; l++) {
-        const trees = [];
-        for (let i = 0; i < 40 + l*10; i++) {
-          trees.push({
-            x: Math.random() * width,
-            height: Math.random() * (200 - l*20) + 150 - l*10,
-            width: Math.random() * 20 + 10,
-            color: `rgba(${10+l*10}, ${20+l*10}, 10, 1)`
-          });
-        }
-        forestLayers.push(trees);
-      }
-    });
-  </script>
 
 </body>
 </html>
